@@ -54,6 +54,38 @@ app.get("/",async(req,res)=>{
     }
 })
 
+pp.put("/:id", async (req, res) => {
+    try {
+        let id = req.params.id;
+        let data = await ScoreModel.findByIdAndUpdate(id, req.body, { new: true });
+
+        if (!data) {
+            return res.status(404).json({ message: "Record not found" }); 
+        }
+
+        res.status(200).json({ message: "Updated successfully", data: data });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
+
+app.delete("/:id", async (req, res) => {
+    try {
+        let id = req.params.id;
+        let data = await ScoreModel.findByIdAndDelete(id);
+
+        if (!data) {
+            return res.status(404).json({ message: "Record not found" }); 
+        }
+
+        res.status(200).json({ message: "Deleted successfully" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
 
 
 const PORT =process.env.PORT
