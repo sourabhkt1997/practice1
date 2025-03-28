@@ -54,6 +54,17 @@ app.get("/",async(req,res)=>{
     }
 })
 
+app.get("/:id",async(req,res)=>{
+    try {
+        let id=req.params.id
+       let data=await ScoreModel.findById(id)
+       res.status(200).json(data)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json("internal server error")
+    }
+})
+
 app.put("/:id", async (req, res) => {
     try {
         let id = req.params.id;
