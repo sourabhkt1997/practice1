@@ -54,7 +54,7 @@ app.get("/",async(req,res)=>{
     }
 })
 
-pp.put("/:id", async (req, res) => {
+app.put("/:id", async (req, res) => {
     try {
         let id = req.params.id;
         let data = await ScoreModel.findByIdAndUpdate(id, req.body, { new: true });
